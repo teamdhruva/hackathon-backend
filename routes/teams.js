@@ -5,9 +5,9 @@ const Team = require('../models/Team');
 
 // Create a new team
 router.post('/new', async (req, res) => {
-  const { userEmail, teamName, teamID, problemStatement } = req.body;
+  const { userEmail, teamName, teamID, problemStatement,person1,preson2,caption1,caption2 } = req.body;
   try {
-    const team = new Team({ userEmail, teamName, teamID, problemStatement });
+    const team = new Team({ userEmail, teamName, teamID, problemStatement,person1,preson2,caption1,caption2});
     await team.save();
     res.status(201).json(team);
   } catch (error) {

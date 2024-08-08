@@ -8,13 +8,11 @@ router.post('/login', async (req, res) => {
   if (!userEmail || !teamName) {
     return res.status(400).json({ message: 'User email and team name are required' });
   }
-
   try {
     // Find the team by userEmail and teamName
     const team = await Team.findOne({ userEmail, teamName });
 
     if (team) {
-      // Authentication successful
       res.status(200).json({ message: 'Login successful', team });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
