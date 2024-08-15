@@ -39,7 +39,8 @@ const TeamSchema = new mongoose.Schema({
   },
   problemStatement: {
     type: String,
-    required: true
+    required: true,
+    unique:false
   }
 });
 

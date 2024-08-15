@@ -11,8 +11,8 @@ router.post('/login', async (req, res) => {
   try {
     // Find the team by userEmail and teamName
     const team = await Team.findOne({ userEmail, teamName });
-
     if (team) {
+      req.session.user={email:team.userEmail, name:team.teamName};
       res.status(200).json({ message: 'Login successful', team });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
@@ -21,5 +21,18 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.get('/logout',(req,res)=>{
+  console.log(req.session.user)
+  req.session.destroy((err)=>{
+    if(err){
+      console.log(err);
+      res.status(500).send('Error logging out');
+    }
+    else{
+      res.status(200).send('Logged out');
+    }
+  })
+})
 
 module.exports = router;
